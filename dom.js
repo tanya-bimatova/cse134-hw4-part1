@@ -329,27 +329,41 @@ function advClone() {
     let clon = template.content.cloneNode(true);
 
     let colorNum = getRandomInt(6) + 1;
-    console.log(colorNum);
+    let animalNum = getRandomInt(36) + 1;
 
     let randDarkColor = getComputedStyle(
       document.documentElement
     ).getPropertyValue(`--darkcolor${colorNum}`);
 
-    clon.children[0].innerHTML = "new title";
+    let randAnimal = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue(`--animal${animalNum}`);
+    randAnimal = randAnimal.replace(/['"]+/g, "");
+
+    clon.children[0].innerHTML = `Animal of the day is ${randAnimal}!`;
     clon.children[0].style.color = `${randDarkColor}`;
 
     //insert a random image from unsplash
-    clon.children[1].src = "https://source.unsplash.com/random/200x200";
+    clon.children[1].src = `https://source.unsplash.com/random/?${randAnimal}`;
     clon.children[1].height = "200";
+    clon.children[1].align = "top";
 
     //paragraph will have a curr date/time
     let currentDate = new Date();
     clon.children[2].innerHTML =
-      "this is a paragraph made on " + currentDate.toLocaleString();
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
+      "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis " +
+      "nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu " +
+      "fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in " +
+      "culpa qui officia deserunt mollit anim id est laborum." +
+      "This is a paragraph made on " +
+      currentDate.toLocaleString() +
+      `. To see another pic of ${randAnimal}, just follow the link below:`;
 
     //ref to wiki for now
-    clon.children[3].href = "https://en.wikipedia.org/wiki/Wiki";
-    clon.children[3].innerHTML = "wiki";
+    clon.children[3].href = `https://source.unsplash.com/random/?${randAnimal}`;
+    clon.children[3].innerHTML = `another cute ${randAnimal}`;
 
     document.body.appendChild(clon);
 
