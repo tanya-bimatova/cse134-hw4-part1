@@ -344,9 +344,8 @@ function advClone() {
     clon.children[0].style.color = `${randDarkColor}`;
 
     //insert a random image from unsplash
-    clon.children[1].src = `https://source.unsplash.com/random/?${randAnimal}`;
-    clon.children[1].height = "200";
-    clon.children[1].align = "top";
+    clon.children[1].firstChild.src = `https://source.unsplash.com/random/?${randAnimal}`;
+    clon.children[1].firstChild.height = "200";
 
     //paragraph will have a curr date/time
     let currentDate = new Date();
@@ -361,14 +360,11 @@ function advClone() {
       currentDate.toLocaleString() +
       `. To see another pic of ${randAnimal}, just follow the link below:`;
 
-    //ref to wiki for now
+    //ref to another image
     clon.children[3].href = `https://source.unsplash.com/random/?${randAnimal}`;
     clon.children[3].innerHTML = `another cute ${randAnimal}`;
 
     document.body.appendChild(clon);
-
-    //let sibling = document.getElementById("controls");
-    //sibling.parentNode.insertBefore(clon, sibling);
   }
 }
 
