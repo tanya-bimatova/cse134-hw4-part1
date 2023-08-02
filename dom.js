@@ -26,6 +26,11 @@ function init() {
     safeRemove();
   });
 
+  element = document.getElementById("selectorRemoveBtn");
+  element.addEventListener("click", function () {
+    selectorRemove();
+  });
+
   element = document.getElementById("travBtn");
   element.addEventListener("click", function () {
     traverseDOMTree();
@@ -282,6 +287,18 @@ function safeRemove() {
   }
   if (elToDelete) {
     document.body.removeChild(elToDelete);
+  }
+}
+
+function selectorRemove() {
+  let textArea = document.getElementById("remTextarea");
+
+  if (textArea.value != "") {
+    let elToDelete = document.querySelector(textArea.value);
+    while (elToDelete) {
+      elToDelete.remove();
+      elToDelete = document.querySelector(textArea.value);
+    }
   }
 }
 
