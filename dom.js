@@ -40,6 +40,11 @@ function init() {
   element.addEventListener("click", function () {
     advModify();
   });
+
+  element = document.getElementById("cloneBtn");
+  element.addEventListener("click", function () {
+    basicClone();
+  });
 }
 
 function advModify() {
@@ -299,6 +304,16 @@ function selectorRemove() {
       elToDelete.remove();
       elToDelete = document.querySelector(textArea.value);
     }
+  }
+}
+
+function basicClone() {
+  let elToClone = document.getElementById("p1");
+  if (elToClone) {
+    let newEl = elToClone.cloneNode(true);
+    newEl.id = "";
+    let sibling = document.getElementById("controls");
+    sibling.parentNode.insertBefore(newEl, sibling);
   }
 }
 
