@@ -45,6 +45,15 @@ function init() {
   element.addEventListener("click", function () {
     basicClone();
   });
+
+  element = document.getElementById("advCloneBtn");
+  element.addEventListener("click", function () {
+    advClone();
+  });
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
 
 function advModify() {
@@ -54,9 +63,6 @@ function advModify() {
 
   /*Changes the color of the h1 to a random dark color from one of the 5 CSS variables defined 
   in the style tag above*/
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
 
   let colorNum = getRandomInt(6) + 1;
   console.log(colorNum);
@@ -314,6 +320,41 @@ function basicClone() {
     newEl.id = "";
     let sibling = document.getElementById("controls");
     sibling.parentNode.insertBefore(newEl, sibling);
+  }
+}
+
+function advClone() {
+  let template = document.getElementsByTagName("template")[0];
+  if (template) {
+    let clon = template.content.cloneNode(true);
+
+    let colorNum = getRandomInt(6) + 1;
+    console.log(colorNum);
+
+    let randDarkColor = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue(`--darkcolor${colorNum}`);
+
+    clon.children[0].innerHTML = "new title";
+    clon.children[0].style.color = `${randDarkColor}`;
+
+    //insert a random image from unsplash
+    clon.children[1].src = "https://source.unsplash.com/random/200x200";
+    clon.children[1].height = "200";
+
+    //paragraph will have a curr date/time
+    let currentDate = new Date();
+    clon.children[2].innerHTML =
+      "this is a paragraph made on " + currentDate.toLocaleString();
+
+    //ref to wiki for now
+    clon.children[3].href = "https://en.wikipedia.org/wiki/Wiki";
+    clon.children[3].innerHTML = "wiki";
+
+    document.body.appendChild(clon);
+
+    //let sibling = document.getElementById("controls");
+    //sibling.parentNode.insertBefore(clon, sibling);
   }
 }
 
